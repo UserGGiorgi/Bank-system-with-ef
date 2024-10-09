@@ -2,6 +2,7 @@ using System.Text.RegularExpressions;
 using BankSystem.Services.Generators;
 using NUnit.Framework;
 
+
 namespace BankSystem.Tests.NumberGeneratorTests;
 
 [TestFixture]

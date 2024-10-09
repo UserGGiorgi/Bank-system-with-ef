@@ -1,5 +1,4 @@
-using BankSystem.Services.Models;
-using BankSystem.Services.Generators;
+
 using BankSystem.Services.Models.Accounts;
 using NUnit.Framework;
 
@@ -8,8 +7,8 @@ namespace BankSystem.Tests.Services;
 [TestFixture]
 public sealed class StandardAccountTests
 {
-    private AccountOwner owner = null!;
-    private IUniqueNumberGenerator dummyInterfaceGenerator = null!;
+    private BankSystem.Services.Models.AccountOwner owner = null!;
+    private BankSystem.Services.Generators.IUniqueNumberGenerator dummyInterfaceGenerator = null!;
     private Func<string> dummyFunctionGenerator = null!;
     private string currencyCode = null!;
     private decimal amount;
@@ -17,7 +16,7 @@ public sealed class StandardAccountTests
     [SetUp]
     public void SetUp()
     {
-        this.owner = new AccountOwner("Zack", "Mills", "Zack.Mills@mail.com");
+        this.owner = new BankSystem.Services.Models.AccountOwner("Zack", "Mills", "Zack.Mills@mail.com");
         this.dummyInterfaceGenerator = new DummyUniqueNumberGenerator();
         this.dummyFunctionGenerator = () => "1234567890";
         this.currencyCode = "USD";
@@ -105,7 +104,7 @@ public sealed class StandardAccountTests
         Assert.That(account.BonusPoints == 108);
     }
 
-    private sealed class DummyUniqueNumberGenerator : IUniqueNumberGenerator
+    private sealed class DummyUniqueNumberGenerator : BankSystem.Services.Generators.IUniqueNumberGenerator
     {
         public string Generate() => "1234567890";
     }

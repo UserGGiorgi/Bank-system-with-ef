@@ -4,7 +4,6 @@ using BankSystem.Services.Models;
 using BankSystem.Services.Models.Accounts;
 using Moq;
 using NUnit.Framework;
-
 namespace BankSystem.Tests.Models;
 
 [TestFixture]

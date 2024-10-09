@@ -31,7 +31,6 @@
       </PackageReference>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\BankSystem.EF\BankSystem.EF.csproj" />
     <ProjectReference Include="..\BankSystem.Services\BankSystem.Services.csproj" />
   </ItemGroup>
   <ItemGroup>

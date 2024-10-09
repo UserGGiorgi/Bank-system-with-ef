@@ -1,23 +1,37 @@
-namespace BankSystem.EF.Entities;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.ComponentModel.DataAnnotations;
 
-public class BankAccount
+namespace BankSystem.EF.Entities
 {
-    public int Id { get; set; }
+    [Table("bank_account")]
+    public class BankAccount
+    {
+        [Key]
+        [Column("bank_account_id")]
+        public int Id { get; set; }
 
-    public int AccountOwnerId { get; set; }
+        [ForeignKey("AccountOwner")]
+        [Column("account_owner_id")]
+        public int AccountOwnerId { get; set; }
 
-    public string Number { get; set; }
+        [Column("account_number")]
+        [MaxLength(20)]
+        public string Number { get; set; }
 
-    public decimal Balance { get; set; }
+        [Column("balance")]
+        public decimal Balance { get; set; }
 
-    public int CurrencyCodeId { get; set; }
+        [ForeignKey("CurrencyCode")]
+        [Column("currency_code_id")]
+        public int CurrencyCodeId { get; set; }
 
-    public int BonusPoints { get; set; }
+        [Column("bonus_points")]
+        public int BonusPoints { get; set; }
 
-    public decimal Overdraft { get; set; }
-
-    public AccountOwner AccountOwner { get; set; }
-
-    public CurrencyCode CurrencyCode { get; set; }
+        [Column("overdraft")]
+        public decimal Overdraft { get; set; }
+        public virtual AccountOwner AccountOwner { get; set; }
+        public virtual CurrencyCode CurrencyCode { get; set; }
+    }
 }
 
