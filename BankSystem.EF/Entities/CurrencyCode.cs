@@ -13,4 +13,10 @@ public class CurrencyCode
     [MaxLength(5)]
     public string CurrenciesCode { get; set; }
 
+    [NotMapped]
+    public decimal ExchangeRate { get; set; }
+
+    public CurrencyCode()
+    {
+    }
 }

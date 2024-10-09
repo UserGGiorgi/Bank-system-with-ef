@@ -27,8 +27,8 @@ public abstract class BankAccount
         this.AccountOwner = owner ?? throw new ArgumentNullException(nameof(owner));
         this.CurrencyCode = currencyCode ?? throw new ArgumentNullException(nameof(currencyCode));
         this.Number = uniqueNumberGenerator?.Generate() ?? throw new ArgumentNullException(nameof(uniqueNumberGenerator));
-        this.operations = [];
         this.Balance = initialBalance;
+        this.operations = [];
     }
 
     protected BankAccount(AccountOwner owner, string currencyCode, Func<string> uniqueNumberGenerator, decimal initialBalance)
@@ -36,8 +36,8 @@ public abstract class BankAccount
         this.AccountOwner = owner ?? throw new ArgumentNullException(nameof(owner));
         this.CurrencyCode = currencyCode ?? throw new ArgumentNullException(nameof(currencyCode));
         this.Number = uniqueNumberGenerator?.Invoke() ?? throw new ArgumentNullException(nameof(uniqueNumberGenerator));
-        this.operations = [];
         this.Balance = initialBalance;
+        this.operations = [];
     }
     public int Id { get; set; }
 
@@ -45,11 +45,11 @@ public abstract class BankAccount
 
     public string Number { get; set; }
 
-    public decimal Balance { get; protected set; }
+    public decimal Balance { get; set; }
 
     public int CurrencyCodeId { get; set; }
 
-    public int BonusPoints { get; protected set; }
+    public int BonusPoints { get; set; }
 
     protected virtual decimal Overdraft { get; set; }
 
