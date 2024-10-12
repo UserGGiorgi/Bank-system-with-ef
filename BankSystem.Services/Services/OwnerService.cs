@@ -20,9 +20,9 @@ public class OwnerService : IDisposable
                 FirstName = a.FirstName,
                 LastName = a.LastName,
                 CurrencyCode = a.BankAccounts.FirstOrDefault().CurrencyCode.CurrenciesCode,
-                Total = (int)a.BankAccounts.Sum(b => (double)b.Balance) // Explicit conversion from decimal to double and back
+                Total = (decimal)a.BankAccounts.Sum(b => (double)b.Balance)
             })
-            .OrderByDescending(a => a.Total)
+            .OrderByDescending(a => (double)a.Total)
             .ToList()
             .AsReadOnly();
     }

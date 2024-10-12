@@ -1,5 +1,4 @@
-using BankSystem.EF.Entities;
-using BankSystem.Services.Generators;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace BankSystem.Services.Models.Accounts;
 public abstract class BankAccount
@@ -28,7 +27,9 @@ public abstract class BankAccount
         this.CurrencyCode = currencyCode ?? throw new ArgumentNullException(nameof(currencyCode));
         this.Number = uniqueNumberGenerator?.Generate() ?? throw new ArgumentNullException(nameof(uniqueNumberGenerator));
         this.Balance = initialBalance;
+        this.BonusPoints += this.CalculateDepositRewardPoints(initialBalance);
         this.operations = [];
+        this.operations.Add(new AccountCashOperation(-initialBalance, DateTime.Now, "note"));
     }
 
     protected BankAccount(AccountOwner owner, string currencyCode, Func<string> uniqueNumberGenerator, decimal initialBalance)
@@ -37,7 +38,9 @@ public abstract class BankAccount
         this.CurrencyCode = currencyCode ?? throw new ArgumentNullException(nameof(currencyCode));
         this.Number = uniqueNumberGenerator?.Invoke() ?? throw new ArgumentNullException(nameof(uniqueNumberGenerator));
         this.Balance = initialBalance;
+        this.BonusPoints += this.CalculateDepositRewardPoints(initialBalance);
         this.operations = [];
+        this.operations.Add(new AccountCashOperation(-initialBalance, DateTime.Now, "note"));
     }
     public int Id { get; set; }
 

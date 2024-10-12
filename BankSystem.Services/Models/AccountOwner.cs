@@ -1,4 +1,3 @@
-using System.Collections.ObjectModel;
 using System.Text.RegularExpressions;
 using BankSystem.Services.Models.Accounts;
 
@@ -7,19 +6,15 @@ public class AccountOwner
 {
     public AccountOwner(string firstName, string lastName, string email)
     {
-        if (firstName == null || string.IsNullOrEmpty(firstName))
-        {
-            throw new ArgumentException("", nameof(firstName));
-        }
-        if (lastName == null || string.IsNullOrEmpty(lastName))
-        {
-            throw new ArgumentException("", nameof(lastName));
-        }
+        VerifyString(firstName, nameof(firstName));
+        VerifyString(lastName, nameof(lastName));
+        VerifyString(email, nameof(email));
         ArgumentException.ThrowIfNullOrEmpty(email);
         ValidateEmail(email);
         this.FirstName = firstName;
         this.LastName = lastName;
         this.Email = email;
+        this.AccountsList = [];
     }
 
     private static readonly Regex EmailRegex = new Regex(
@@ -51,13 +46,21 @@ public class AccountOwner
     public void Add(BankAccount account)
     {
         ArgumentNullException.ThrowIfNull(account);
+        ArgumentNullException.ThrowIfNull(this.AccountsList);
         this.AccountsList.Add(account);
     }
 
-    public ReadOnlyCollection<BankAccount> Accounts()
+    public ICollection<BankAccount> Accounts()
     {
-        ArgumentNullException.ThrowIfNull(this.AccountsList);
-        return this.AccountsList.AsReadOnly();
+        return this.AccountsList;
+    }
+
+    private static void VerifyString(string value, string name)
+    {
+        if (value == null || string.IsNullOrEmpty(value))
+        {
+            throw new ArgumentException("IsNull", name);
+        }
     }
 
 }

@@ -3,6 +3,6 @@ public class GuidNumberGenerator : IUniqueNumberGenerator
 {
     public string Generate()
     {
-        return Guid.NewGuid().ToString();
+        return Guid.NewGuid().ToString("N");
     }
 }

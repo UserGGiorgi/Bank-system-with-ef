@@ -22,7 +22,7 @@ public class SimpleGenerator : IUniqueNumberGenerator
         this.lastNumber++;
         byte[] inputBytes = Encoding.UTF8.GetBytes(this.lastNumber.ToString(CultureInfo.InvariantCulture));
         byte[] hashBytes = MD5.HashData(inputBytes);
-        return Convert.ToBase64String(hashBytes);
+        return BitConverter.ToString(hashBytes).Replace("-", "").ToLower(CultureInfo.CurrentCulture);
     }
 }
 
